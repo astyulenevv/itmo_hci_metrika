@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Личный мини-сайт</title>
+    <style>
+        :root {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color-scheme: light dark;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f5f5f8;
+            color: #222;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: #ffffffdd;
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .nav {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0.7rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav__logo {
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            font-size: 1.1rem;
+        }
+
+        .nav__links a {
+            margin-left: 1rem;
+            text-decoration: none;
+            color: #444;
+            font-size: 0.95rem;
+        }
+
+        .nav__links a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem 3rem;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
+            gap: 2rem;
+            padding: 2rem 1.5rem;
+            margin-top: 1rem;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #eef3ff, #fef9ff);
+        }
+
+        .hero h1 {
+            margin-top: 0;
+            font-size: clamp(1.7rem, 2.6vw, 2.2rem);
+        }
+
+        .hero p {
+            margin-bottom: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.6rem 1rem;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: #2f6bff;
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #2f2f2f;
+            border: 1px solid #d0d0d0;
+        }
+
+        .hero-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        .hero-stat {
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            background: #fff;
+            border: 1px solid #ececec;
+        }
+
+        section {
+            margin-top: 3rem;
+        }
+
+        section h2 {
+            margin-top: 0;
+            margin-bottom: 0.4rem;
+        }
+
+        section p {
+            margin-top: 0.2rem;
+            margin-bottom: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1rem;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid #e5e5e5;
+            font-size: 0.95rem;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 0.4rem;
+            font-size: 1.05rem;
+        }
+
+        .timeline {
+            border-left: 2px solid #d0d0ff;
+            padding-left: 1rem;
+            margin-top: 1rem;
+        }
+
+        .timeline-item {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -1.14rem;
+            top: 0.3rem;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #2f6bff;
+        }
+
+        .timeline-item h3 {
+            margin: 0;
+            font-size: 0.98rem;
+        }
+
+        .timeline-item span {
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        form {
+            display: grid;
+            gap: 0.7rem;
+            max-width: 460px;
+        }
+
+        label {
+            font-size: 0.9rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #d3d3d3;
+            padding: 0.5rem 0.6rem;
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        footer {
+            border-top: 1px solid #e0e0e0;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #666;
+            background: #fafafa;
+        }
+
+        @media (max-width: 720px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .nav__links {
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 1.4rem 1.1rem;
+            }
+        }
+    </style>
+
+    <!-- СЮДА ВСТАВЬ КОД СЧЁТЧИКА ЯНДЕКС.МЕТРИКИ
+         1. В Метрике создаёшь счётчик, включаешь «Вебвизор, карта скроллинга, аналитика форм».
+         2. Копируешь выданный код JavaScript.
+         3. Вставляешь его вместо этого комментария (желательно в <head> или перед </body>). -->
+</head>
+<body>
+<header>
+    <nav class="nav">
+        <div class="nav__logo">MiniSite</div>
+        <div class="nav__links">
+            <a href="#about">О проекте</a>
+            <a href="#activities">Чем занимаюсь</a>
+            <a href="#log">Дневник</a>
+            <a href="#contact">Контакты</a>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="hero" id="top">
+        <div>
+            <h1>Небольшой личный сайт для экспериментов</h1>
+            <p>
+                Это простая страница, на которой я тестирую аналитику, Вебвизор и разные идеи.
+                Никакого серьёзного контента, только клики, скролл и немного текстов.
+            </p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="alert('Клик зафиксирован!');">
+                    Нажми меня
+                </button>
+                <a class="btn btn-secondary" href="#contact">
+                    Написать сообщение
+                </a>
+            </div>
+        </div>
+        <div class="hero-side">
+            <div class="hero-stat">
+                <strong>Зачем эта страница?</strong><br />
+                Чтобы проверить, как работает Яндекс.Метрика, Вебвизор, карта скроллинга
+                и отчёты по формам на реальном сайте.
+            </div>
+            <div class="hero-stat">
+                <strong>Что можно сделать?</strong><br />
+                Пролистать страницу, нажать кнопки, заполнить форму — всё это попадёт в аналитику.
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>О проекте</h2>
+        <p>
+            Эта страница не является коммерческим проектом. Она создана исключительно
+            для учебных и тестовых целей: проверки установки счётчика, анализа поведения
+            пользователей и подготовки отчёта по аналитике.
+        </p>
+        <p>
+            Структура страницы максимально упрощена: несколько блоков с текстом,
+            интерактивные элементы и форма обратной связи. Этого достаточно, чтобы
+            Вебвизор корректно записывал сессии и показывал сценарии взаимодействия.
+        </p>
+        <div class="cards">
+            <article class="card">
+                <h3>Клики</h3>
+                <p>Кнопки и ссылки на странице нужны, чтобы в отчётах было видно, какие элементы привлекают внимание.</p>
+            </article>
+            <article class="card">
+                <h3>Скролл</h3>
+                <p>Длинный текст и блоки «ниже экрана» помогают оценить глубину прокрутки и интерес к содержимому.</p>
+            </article>
+            <article class="card">
+                <h3>Формы</h3>
+                <p>Форма контакта позволяет протестировать отчёты «Аналитика форм» и посмотреть, на каком шаге пользователи останавливаются.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="activities">
+        <h2>Чем я занимаюсь</h2>
+        <p>
+            В рамках учебных задач я экспериментирую с настройкой аналитики, рассматриванием отчётов
+            и поиском закономерностей в поведении пользователей. Ниже — небольшой условный «план».
+        </p>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>Создание макета страницы</h3>
+                <span>Шаг 1</span>
+                <p>Спроектировать минимальный, но удобочитаемый интерфейс с несколькими блоками и навигацией.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Подключение счётчика</h3>
+                <span>Шаг 2</span>
+                <p>Установить код счётчика Яндекс.Метрики, включить нужные опции и убедиться, что данные собираются.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Сбор данных</h3>
+                <span>Шаг 3</span>
+                <p>Разослать ссылку друзьям или одногруппникам, попросить выполнить пару действий на сайте.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Анализ результатов</h3>
+                <span>Шаг 4</span>
+                <p>Посмотреть Вебвизор, карту скроллинга и отчёты по источникам трафика, сделать выводы для отчёта.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="log">
+        <h2>Небольшой дневник изменений</h2>
+        <p>
+            Здесь можно добавлять заметки о том, что менялось на странице. Это удобно, когда
+            нужно связать изменения интерфейса и показатели аналитики.
+        </p>
+        <ul>
+            <li>Добавлена эта страница и подключён счётчик.</li>
+            <li>Настроена запись сессий в Вебвизоре.</li>
+            <li>Проверены клики по кнопкам и заполнение формы.</li>
+        </ul>
+    </section>
+
+    <section id="contact">
+        <h2>Форма обратной связи</h2>
+        <p>
+            Эта форма служит учебным примером. Сообщения никуда не отправляются,
+            но все шаги пользователя попадут в аналитику и Вебвизор.
+        </p>
+        <form onsubmit="event.preventDefault(); alert('Форма отправлена (условно)!');">
+            <div>
+                <label for="name">Имя</label><br/>
+                <input id="name" name="name" type="text" placeholder="Как к вам обращаться?" />
+            </div>
+            <div>
+                <label for="email">Почта</label><br/>
+                <input id="email" name="email" type="email" placeholder="example@mail.ru" />
+            </div>
+            <div>
+                <label for="message">Сообщение</label><br/>
+                <textarea id="message" name="message" placeholder="Напишите любой текст для теста аналитики"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Отправить</button>
+        </form>
+    </section>
+</main>
+
+<footer>
+    © 2024 Учебный мини-сайт. Страница создана для тестирования Яндекс.Метрики.
+</footer>
+
+</body>
+</html>
